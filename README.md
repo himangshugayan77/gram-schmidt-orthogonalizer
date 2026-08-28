@@ -186,7 +186,7 @@ vivado -mode batch -source synth_vivado.tcl   # out-of-context, needs Vivado
 ## Author
 
 **[Himangshu Gayan]**  
-Hardware Engineer | Power Electronics | ARM SoC Design
+Hardware Engineer
 
 - 📧 Email: [himangshugayan7@gmail.com]
 
