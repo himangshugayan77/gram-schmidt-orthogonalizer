@@ -1,0 +1,32 @@
+# Open-source elaboration and area check.
+#   yosys synth_yosys.ys
+# Checks for latches, multiply-driven nets and unmapped cells, then reports
+# the operator inventory (expect $mul = 2*P + 1).
+
+read_verilog ../rtl/round_sat.v
+read_verilog ../rtl/ram_1r1w.v
+read_verilog ../rtl/ram_2r1w.v
+read_verilog ../rtl/vec_mac.v
+read_verilog ../rtl/vec_axpy.v
+read_verilog ../rtl/rsqrt_seed_rom.v
+read_verilog ../rtl/rsqrt_unit.v
+read_verilog ../rtl/gs_top.v
+
+hierarchy -top gs_top
+proc
+opt
+memory_dff
+wreduce
+opt
+
+# fails loudly on inferred latches or multiply-driven signals
+check -assert
+
+# operator inventory before technology mapping
+flatten
+opt -fast
+stat
+
+# full mapping to generic gates, as a smoke test that nothing is unsynthesisable
+synth -top gs_top
+stat

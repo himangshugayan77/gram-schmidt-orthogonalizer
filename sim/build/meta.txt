@@ -1,0 +1,10 @@
+M 8
+N 4
+P 2
+W 18
+F 16
+case random
+rank_def 0
+ovf 0
+cond 4.285606e+00
+tol_lsb 64.0
